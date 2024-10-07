@@ -15,21 +15,25 @@ MonoBehaviour:
   nodeList:
   - Name: MA
     NodeId: 0
-    Type: 1
+    Type: 0
     TimeSpan: 0.8
     NodePrefab: {fileID: 5918415005798921891, guid: 4ccef0da841d99642ad4daf16e536d0e, type: 3}
+    NodeBPrefab: {fileID: 5142827154656344781, guid: 0926b730c007c1f44b6f658f9d801b04, type: 3}
   - Name: KA
-    NodeId: 0
-    Type: 2
+    NodeId: 1
+    Type: 0
     TimeSpan: 0.5
     NodePrefab: {fileID: 5918415005798921891, guid: 4ccef0da841d99642ad4daf16e536d0e, type: 3}
+    NodeBPrefab: {fileID: 5142827154656344781, guid: 0926b730c007c1f44b6f658f9d801b04, type: 3}
   - Name: BA
-    NodeId: 0
-    Type: 3
+    NodeId: 2
+    Type: 0
     TimeSpan: 0.25
     NodePrefab: {fileID: 5918415005798921891, guid: 4ccef0da841d99642ad4daf16e536d0e, type: 3}
+    NodeBPrefab: {fileID: 5142827154656344781, guid: 0926b730c007c1f44b6f658f9d801b04, type: 3}
   - Name: WA
-    NodeId: 0
-    Type: 4
+    NodeId: 3
+    Type: 0
     TimeSpan: 0.75
     NodePrefab: {fileID: 5918415005798921891, guid: 4ccef0da841d99642ad4daf16e536d0e, type: 3}
+    NodeBPrefab: {fileID: 5142827154656344781, guid: 0926b730c007c1f44b6f658f9d801b04, type: 3}

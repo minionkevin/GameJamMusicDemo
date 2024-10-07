@@ -15,5 +15,6 @@ public class MusicNode
     public int NodeId;
     public int Type;
     public float TimeSpan;
-    public GameObject NodePrefab;   
+    public GameObject NodePrefab;
+    public GameObject NodeBPrefab;
 }

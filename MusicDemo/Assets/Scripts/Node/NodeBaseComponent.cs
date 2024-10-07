@@ -20,7 +20,7 @@ public class NodeBaseComponent : MonoBehaviour
         this.nodeId = id;
         this.type = type;
         this.TimeSpan = timeSpan;
-        NameLabel.text = name;
+        if(NameLabel!=null) NameLabel.text = name;
     }
 
     // setup sound here

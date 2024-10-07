@@ -1,24 +1,32 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class NodeGeneratorComponent : MonoBehaviour
 {
+    public bool IsPlayerB;
+    public RectTransform MusicNodeContainer;
+    
     // todo Add object pool for all nodes 
     private List<GameObject> nodeList = new List<GameObject>();
+    private List<int> randomNodeList = new List<int>();
     
     private void Start()
     {
         // todo read in data here
-        for (int i = 0; i < 20; i++)
-        {
-            HandleSpawnNode(NodeManager.Instance.NodeData.nodeList[Random.Range(0, NodeManager.Instance.NodeData.nodeList.Count - 1)]);
-        }
+        randomNodeList.Add(0);
+        randomNodeList.Add(2);
+        randomNodeList.Add(3);
+        randomNodeList.Add(1);
+        randomNodeList.Add(0);
+        randomNodeList.Add(2);
 
+        foreach (var num in randomNodeList)
+        {
+            HandleSpawnNode(NodeManager.Instance.NodeData.nodeList[num]);   
+        }
+        
         StartCoroutine(ActivateNodes());
     }
     
@@ -28,7 +36,7 @@ public class NodeGeneratorComponent : MonoBehaviour
         NodeReceiverComponent receiverComponent = NodeManager.Instance.FindStartPos(nodeData.Name);
         if (receiverComponent == null) return;
         
-        GameObject node = Instantiate(nodeData.NodePrefab,receiverComponent.transform);
+        GameObject node = IsPlayerB ? Instantiate(nodeData.NodeBPrefab, MusicNodeContainer) : Instantiate(nodeData.NodePrefab, receiverComponent.transform);
         Vector3 startPos = new Vector3(node.transform.position.x, transform.position.y, 0);
         node.transform.position = startPos;
         
@@ -56,6 +64,7 @@ public class NodeGeneratorComponent : MonoBehaviour
     {
         // Change duration
         // Play sound here
+
         Sequence timeline = DOTween.Sequence();
         timeline.Insert(0, nodeComponent.transform.DOMoveY(nodeComponent.transform.parent.position.y, 1.0f).SetEase(Ease.Linear));
         timeline.Insert(1.15f, nodeComponent.transform.DOScale(0, 0.15f));

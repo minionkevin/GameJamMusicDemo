@@ -7,6 +7,7 @@ public class TimeComponent : MonoBehaviour
 {
     public TextMeshProUGUI TimeLabel;
     public TextMeshProUGUI CountDownLabel;
+    public GameStartComponent GameStart;
 
     private DateTime finalTime;
     private bool isCount = false;
@@ -26,14 +27,14 @@ public class TimeComponent : MonoBehaviour
         TimeLabel.text = finalTime.ToString();
     }
 
-    public void ShowStartTime()
+    public void ShowStartTime(bool isA)
     {
         TimeSpan timeDiff = finalTime - DateTime.UtcNow;
         if (timeDiff.TotalMilliseconds <= 2000f) Show30Seconds(true);
-        StartCoroutine(HandleCountDown());
+        StartCoroutine(HandleCountDown(isA));
     }
 
-    IEnumerator HandleCountDown()
+    IEnumerator HandleCountDown(bool isA)
     {
         isCount = true;
 
@@ -44,6 +45,7 @@ public class TimeComponent : MonoBehaviour
             {
                 timeDiff = TimeSpan.Zero;
                 isCount = false;
+                GameStart.HandleLoadScene(isA);
             }
             
             CountDownLabel.text = string.Format("{0:D2}:{1:D2}:{2:D3}",
@@ -54,7 +56,4 @@ public class TimeComponent : MonoBehaviour
                 yield return new WaitForSeconds(0.001f);
         }
     }
-    
-    
-    
 }
