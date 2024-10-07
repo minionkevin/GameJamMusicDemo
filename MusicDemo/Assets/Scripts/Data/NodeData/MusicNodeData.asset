@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bf878e9a0308e41a87c294fc5fd8b7, type: 3}
+  m_Name: MusicNodeData
+  m_EditorClassIdentifier: 
+  nodeList:
+  - Name: MA
+    NodeId: 0
+    Type: 1
+    TimeSpan: 0.8
+    NodePrefab: {fileID: 5918415005798921891, guid: 4ccef0da841d99642ad4daf16e536d0e, type: 3}
+  - Name: KA
+    NodeId: 0
+    Type: 2
+    TimeSpan: 0.5
+    NodePrefab: {fileID: 5918415005798921891, guid: 4ccef0da841d99642ad4daf16e536d0e, type: 3}
+  - Name: BA
+    NodeId: 0
+    Type: 3
+    TimeSpan: 0.25
+    NodePrefab: {fileID: 5918415005798921891, guid: 4ccef0da841d99642ad4daf16e536d0e, type: 3}
+  - Name: WA
+    NodeId: 0
+    Type: 4
+    TimeSpan: 0.75
+    NodePrefab: {fileID: 5918415005798921891, guid: 4ccef0da841d99642ad4daf16e536d0e, type: 3}
