@@ -20,16 +20,17 @@ public class NodeReceiverComponent : MonoBehaviour
 
     public void HandlePlayerInput()
     {
+
         foreach (var node in NodeManager.Instance.nodeList)
         {
             var nodeComponent = node.GetComponent<NodeBaseComponent>();
             
-            if(nodeComponent.IsCheck || !node.activeSelf) continue;
+            if(nodeComponent.IsCheck || !node.activeSelf)continue;
             nodeComponent.IsCheck = true;
             CheckForScore(nodeComponent);
             break;
         }
-        
+
         // todo cleanup and reuse
         // 用objectpool就不用担心删除问题
         // 失活之后直接cleanup就可以继续排队了

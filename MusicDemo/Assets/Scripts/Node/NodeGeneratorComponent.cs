@@ -81,8 +81,15 @@ public class NodeGeneratorComponent : MonoBehaviour
         timeline.Insert(0, nodeComponent.transform.DOMoveY(!IsPlayerB ? nodeComponent.transform.parent.position.y : MusicNodeContainer.transform.position.y, 1.5f).SetEase(Ease.Linear));
         timeline.Insert(1.5f, nodeComponent.transform.DOScale(0, 0.15f));
         await timeline.Play().AsyncWaitForCompletion();
+        
+        // todo list会有点问题
+        
+        if (IsPlayerB && nodeComponent.IsCheck)
+        {
+            NodeManager.Instance.RemoveOnNodeList(nodeComponent.gameObject);
+        }
 
-        if (IsPlayerB)
+        if (IsPlayerB && !nodeComponent.IsCheck && nodeComponent.gameObject.activeSelf)
         {
             // 处理当块过了并且玩家没有任何输入的情况
             nodeComponent.IsCheck = true;
