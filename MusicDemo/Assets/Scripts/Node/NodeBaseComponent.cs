@@ -7,16 +7,17 @@ using UnityEngine.Serialization;
 public class NodeBaseComponent : MonoBehaviour
 {
     public TextMeshProUGUI NameLabel;
-    protected string nodeName;
+    public string NodeName;
     protected int nodeId;
     protected int type;
     public float TimeSpan;
     protected NodeReceiverComponent receiver;
+    public bool IsCheck = false;
 
 
     public void Setup(string name, int id, int type, float timeSpan)
     {
-        this.nodeName = name;
+        this.NodeName = name;
         this.nodeId = id;
         this.type = type;
         this.TimeSpan = timeSpan;
