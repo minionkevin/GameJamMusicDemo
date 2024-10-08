@@ -17,7 +17,7 @@ public class NodeGeneratorComponent : MonoBehaviour
     private void Start()
     {
         // check for completion and increase level here
-        SpawnLevel(0);
+        SpawnLevel(!IsPlayerB ? 0 : 1);
         StartCoroutine(ActivateNodes());
     }
 
@@ -50,7 +50,8 @@ public class NodeGeneratorComponent : MonoBehaviour
         nodeComponent.Setup(nodeData.Name,nodeData.NodeId,nodeData.Type,nodeData.StartTime);
         node.SetActive(false);
         
-        NodeManager.Instance.AddOnNodeList(node);
+        NodeManager.Instance.nodeList.Add(node);
+        
         if (nodeData.Type == NodeType.NORMAL)
         {
             nodeComponent.SetupReceiver(receiverComponent);
@@ -84,10 +85,10 @@ public class NodeGeneratorComponent : MonoBehaviour
         
         // todo list会有点问题
         
-        if (IsPlayerB && nodeComponent.IsCheck)
-        {
-            NodeManager.Instance.RemoveOnNodeList(nodeComponent.gameObject);
-        }
+        // if (IsPlayerB && nodeComponent.IsCheck)
+        // {
+        //     NodeManager.Instance.nodeList.Remove(nodeComponent.gameObject);
+        // }
 
         if (IsPlayerB && !nodeComponent.IsCheck && nodeComponent.gameObject.activeSelf)
         {

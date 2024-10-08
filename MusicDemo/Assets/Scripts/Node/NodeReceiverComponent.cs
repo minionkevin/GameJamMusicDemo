@@ -23,6 +23,7 @@ public class NodeReceiverComponent : MonoBehaviour
 
         foreach (var node in NodeManager.Instance.nodeList)
         {
+            if (node == null) continue;
             var nodeComponent = node.GetComponent<NodeBaseComponent>();
             
             if(nodeComponent.IsCheck || !node.activeSelf)continue;

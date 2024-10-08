@@ -13,40 +13,56 @@ MonoBehaviour:
   m_Name: MusicNodeData
   m_EditorClassIdentifier: 
   NodeList:
+  - Name: NA
+    NodeId: 0
+    Type: 4
+    StartTime: 0.5
+    Group: 0
+  - Name: BA
+    NodeId: 0
+    Type: 0
+    StartTime: 2
+    Group: 0
+  - Name: KA
+    NodeId: 0
+    Type: 0
+    StartTime: 2.5
+    Group: 0
   - Name: MA
     NodeId: 0
     Type: 0
-    StartTime: 0
+    StartTime: 3
+    Group: 0
+  - Name: KA
+    NodeId: 0
+    Type: 0
+    StartTime: 3.5
     Group: 0
   - Name: NA
     NodeId: 0
     Type: 3
-    StartTime: 0.5
-    Group: 0
-  - Name: NA
+    StartTime: 0
+    Group: 1
+  - Name: BA
     NodeId: 0
-    Type: 5
+    Type: 2
     StartTime: 2
-    Group: 0
-  - Name: NA
+    Group: 1
+  - Name: KA
     NodeId: 0
-    Type: 5
-    StartTime: 5
-    Group: 0
-  - Name: NA
+    Type: 2
+    StartTime: 2.5
+    Group: 1
+  - Name: MA
     NodeId: 0
-    Type: 5
-    StartTime: 8
-    Group: 0
-  - Name: NA
+    Type: 2
+    StartTime: 3
+    Group: 1
+  - Name: KA
     NodeId: 0
-    Type: 5
-    StartTime: 10
-    Group: 0
-  - Name: NA
-    NodeId: 0
-    Type: 5
-    StartTime: 2
-    Group: 0
+    Type: 2
+    StartTime: 3.5
+    Group: 1
   GroupStartTime:
+  - 0
   - 0

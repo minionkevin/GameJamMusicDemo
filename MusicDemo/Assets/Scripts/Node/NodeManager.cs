@@ -26,16 +26,6 @@ public class NodeManager : BaseSingleton<NodeManager>
         return null;
     }
 
-    public void AddOnNodeList(GameObject item)
-    {
-        nodeList.Add(item);
-    }
-
-    public void RemoveOnNodeList(GameObject item)
-    {
-        nodeList.Remove(item);
-    }
-
     public void ChangeState(int type)
     {
         // Add color/animation here
