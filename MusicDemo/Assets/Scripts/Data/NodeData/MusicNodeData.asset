@@ -41,7 +41,7 @@ MonoBehaviour:
   - Name: NA
     NodeId: 0
     Type: 3
-    StartTime: 0
+    StartTime: 0.5
     Group: 1
   - Name: BA
     NodeId: 0
