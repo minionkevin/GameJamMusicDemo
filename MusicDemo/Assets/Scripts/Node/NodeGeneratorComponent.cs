@@ -8,6 +8,7 @@ public class NodeGeneratorComponent : MonoBehaviour
     public bool IsPlayerB;
     public RectTransform MusicNodeContainer;
     // 根据type来区分prefab，不需要每个配置
+    // 注意：A和B的顺序必须和NodeType保持完全一样
     public List<GameObject> NodePrefab = new List<GameObject>();
     
     // todo Add object pool for all nodes 

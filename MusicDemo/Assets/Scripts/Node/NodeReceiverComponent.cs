@@ -1,27 +1,21 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NodeReceiverComponent : MonoBehaviour
 {
     public TextMeshProUGUI NameLabel;
     public string Name;
-
-    public const int NodeGeneratorPosY = 800;
+    
+    private const int NodeGeneratorPosY = 800;
 
     private void Awake()
     {
         NodeManager.Instance.AddReceiver(this);
         NameLabel.text = Name;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            
-        }
     }
 
     public void HandlePlayerInput()
@@ -50,7 +44,7 @@ public class NodeReceiverComponent : MonoBehaviour
     
     private void CheckForScore(NodeBaseComponent node)
     {
-        if (!node.NodeName.Equals(Name))
+        if (!node.NodeName.Equals("NA") && !node.NodeName.Equals(Name))
         {
             NodeManager.Instance.ChangeState(StateType.MISS);
         }
@@ -66,10 +60,8 @@ public class NodeReceiverComponent : MonoBehaviour
         {
             NodeManager.Instance.ChangeState(StateType.GOOD);
         }
-        else
-        {
-            NodeManager.Instance.ChangeState(StateType.MISS);
-        }
+        else NodeManager.Instance.ChangeState(StateType.MISS);
+        
         HandleOverAnimation(node);
     }
 
