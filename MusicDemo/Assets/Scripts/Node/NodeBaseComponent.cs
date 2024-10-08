@@ -9,18 +9,18 @@ public class NodeBaseComponent : MonoBehaviour
     public TextMeshProUGUI NameLabel;
     public string NodeName;
     protected int nodeId;
-    protected int type;
-    public float TimeSpan;
+    public int type;
+    public float StartTime;
     protected NodeReceiverComponent receiver;
     public bool IsCheck = false;
 
 
-    public void Setup(string name, int id, int type, float timeSpan)
+    public void Setup(string name, int id, int type, float startTime)
     {
         this.NodeName = name;
         this.nodeId = id;
         this.type = type;
-        this.TimeSpan = timeSpan;
+        this.StartTime = startTime;
         if(NameLabel!=null) NameLabel.text = name;
     }
 
@@ -33,10 +33,3 @@ public class NodeBaseComponent : MonoBehaviour
 
 }
 
-// todo check this?
-[System.Serializable]
-public class NodeType
-{
-    public const int Normal = 1;
-    public const int Hide = 2;
-}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3326531548537614760}
   - component: {fileID: 4888148174043666023}
   m_Layer: 5
-  m_Name: NodeBShow
+  m_Name: NodeHide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -90,5 +90,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameLabel: {fileID: 0}
   NodeName: 
-  TimeSpan: 0
+  StartTime: 0
   IsCheck: 0

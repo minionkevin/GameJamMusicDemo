@@ -926,6 +926,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPlayerB: 1
   MusicNodeContainer: {fileID: 1609877859}
+  NodePrefab:
+  - {fileID: 5918415005798921891, guid: 4ccef0da841d99642ad4daf16e536d0e, type: 3}
+  - {fileID: 5142827154656344781, guid: 8956fea8fbebffe4ea9d4649ff42c8bc, type: 3}
+  - {fileID: 5142827154656344781, guid: 0926b730c007c1f44b6f658f9d801b04, type: 3}
+  - {fileID: 5142827154656344781, guid: 409502e0792fe4c4bbe0367402bf2776, type: 3}
+  - {fileID: 5142827154656344781, guid: c5e66cfce213fef4c9e7e75120d3a6fc, type: 3}
+  - {fileID: 5142827154656344781, guid: 7eca88b3fa9660d4bb603b21a7119b7a, type: 3}
 --- !u!1001 &1423652260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1041,7 +1048,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1609877859}
-  - component: {fileID: 1609877860}
   m_Layer: 5
   m_Name: NodeBContainer
   m_TagString: Untagged
@@ -1068,20 +1074,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 900, y: 100}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &1609877860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1609877858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 401252bc9f4408f40a5e57ea0ed8f8ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsPlayerB: 1
-  MusicNodeContainer: {fileID: 1673636128}
 --- !u!1 &1673636127
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class NodeManager : BaseSingleton<NodeManager>
 {
     public NodeScriptableObject NodeData;
     public TextMeshProUGUI StateLabel;
-    private List<NodeReceiverComponent> receiverList = new List<NodeReceiverComponent>();
+    public List<NodeReceiverComponent> receiverList = new List<NodeReceiverComponent>();
     
     // change to private later
     public List<GameObject> nodeList = new List<GameObject>();

@@ -7,69 +7,66 @@ public class NodeGeneratorComponent : MonoBehaviour
 {
     public bool IsPlayerB;
     public RectTransform MusicNodeContainer;
-    
-    // 开始到现在
-    // 一个片段里面的节奏
+    // 根据type来区分prefab，不需要每个配置
+    public List<GameObject> NodePrefab = new List<GameObject>();
     
     // todo Add object pool for all nodes 
-    private List<int> randomNodeList = new List<int>();
+    private float groupWaitSpan = 0f;
     
     private void Start()
     {
-        // todo read in data here
-        // randomNodeList.Add(0);
-        // randomNodeList.Add(2);
-        // randomNodeList.Add(3);
-        // randomNodeList.Add(1);
-        // randomNodeList.Add(0);
-        // randomNodeList.Add(2);
-        
-        randomNodeList.Add(0);
-        randomNodeList.Add(0);
-        randomNodeList.Add(0);
-        randomNodeList.Add(0);
-        randomNodeList.Add(0);
-        randomNodeList.Add(0);
-        randomNodeList.Add(0);
-        randomNodeList.Add(0);
-        randomNodeList.Add(0);
-        randomNodeList.Add(0);
-
-        foreach (var num in randomNodeList)
-        {
-            HandleSpawnNode(NodeManager.Instance.NodeData.nodeList[num]);   
-        }
-        
+        // check for completion and increase level here
+        SpawnLevel(0);
         StartCoroutine(ActivateNodes());
     }
-    
+
+    private void SpawnLevel(int levelNum)
+    {
+        foreach (var nodeData in NodeManager.Instance.NodeData.NodeList)
+        {
+            if(nodeData.Group==levelNum) HandleSpawnNode(nodeData);
+        }
+        groupWaitSpan = NodeManager.Instance.NodeData.GroupStartTime[levelNum];
+    }
+
+    private GameObject FindSpawnPrefab(int type)
+    {
+        return NodePrefab[type];
+    }
     
     private void HandleSpawnNode(MusicNode nodeData)
     {
         NodeReceiverComponent receiverComponent = NodeManager.Instance.FindStartPos(nodeData.Name);
-        if (receiverComponent == null) return;
         
-        GameObject node = IsPlayerB ? Instantiate(nodeData.NodeBPrefab, MusicNodeContainer) : Instantiate(nodeData.NodePrefab, receiverComponent.transform);
+        if (nodeData.Type == NodeType.NORMAL && receiverComponent == null) return;
+        Transform trans = nodeData.Type == NodeType.NORMAL ? receiverComponent.transform : MusicNodeContainer;
+
+        GameObject node = Instantiate(FindSpawnPrefab(nodeData.Type),trans); 
         Vector3 startPos = new Vector3(node.transform.position.x, transform.position.y, 0);
         node.transform.position = startPos;
         
         NodeBaseComponent nodeComponent = node.GetComponent<NodeBaseComponent>();
-        nodeComponent.Setup(nodeData.Name,nodeData.NodeId,nodeData.Type,nodeData.TimeSpan);
+        nodeComponent.Setup(nodeData.Name,nodeData.NodeId,nodeData.Type,nodeData.StartTime);
         node.SetActive(false);
-        NodeManager.Instance.AddOnNodeList(node);
         
-        // maybe we dont need setup receiver, .parent can do same thing
-        nodeComponent.SetupReceiver(receiverComponent);
+        NodeManager.Instance.AddOnNodeList(node);
+        if (nodeData.Type == NodeType.NORMAL)
+        {
+            nodeComponent.SetupReceiver(receiverComponent);
+            node.transform.SetParent(receiverComponent.transform);
+        }
+        else node.transform.SetParent(MusicNodeContainer);
     }
 
     private IEnumerator ActivateNodes()
     {
+        yield return new WaitForSeconds(groupWaitSpan);
         foreach (var node in NodeManager.Instance.nodeList)
         {
             node.SetActive(true);
             NodeBaseComponent nodeComponent = node.GetComponent<NodeBaseComponent>();
             HandleNodeMove(nodeComponent);
-            yield return new WaitForSeconds(nodeComponent.TimeSpan);
+            yield return new WaitForSeconds(nodeComponent.StartTime);
         }
     }
 
@@ -80,7 +77,7 @@ public class NodeGeneratorComponent : MonoBehaviour
         // Play with this animation
 
         Sequence timeline = DOTween.Sequence();
-        timeline.Insert(0, nodeComponent.transform.DOMoveY(nodeComponent.transform.parent.position.y, 1.5f).SetEase(Ease.Linear));
+        timeline.Insert(0, nodeComponent.transform.DOMoveY(!IsPlayerB ? nodeComponent.transform.parent.position.y : MusicNodeContainer.transform.position.y, 1.5f).SetEase(Ease.Linear));
         timeline.Insert(1.5f, nodeComponent.transform.DOScale(0, 0.15f));
         await timeline.Play().AsyncWaitForCompletion();
 
@@ -92,7 +89,8 @@ public class NodeGeneratorComponent : MonoBehaviour
             NodeManager.Instance.ChangeState(StateType.MISS);
             return;
         }
-        NodeManager.Instance.RemoveOnNodeList(nodeComponent.gameObject);
+        // use object pool and clean up 0.o
+        // NodeManager.Instance.RemoveOnNodeList(nodeComponent.gameObject);
         Destroy(nodeComponent.gameObject);  
     }
 }

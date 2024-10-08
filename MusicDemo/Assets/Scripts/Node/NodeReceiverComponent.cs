@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -8,23 +9,23 @@ public class NodeReceiverComponent : MonoBehaviour
     public string Name;
 
     public const int NodeGeneratorPosY = 800;
-    
 
-    public void Start()
+    private void Awake()
     {
-        NameLabel.text = Name;
         NodeManager.Instance.AddReceiver(this);
+        NameLabel.text = Name;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            
+        }
     }
 
     public void HandlePlayerInput()
     {
-        // 根据位置进行判定
-        
-        // 先确定player试图拿到哪一个音符
-        // 当player点击按钮，查看位置，并且根据速度确定时间
-
-
-        
         foreach (var node in NodeManager.Instance.nodeList)
         {
             var nodeComponent = node.GetComponent<NodeBaseComponent>();
@@ -38,8 +39,6 @@ public class NodeReceiverComponent : MonoBehaviour
         // todo cleanup and reuse
         // 用objectpool就不用担心删除问题
         // 失活之后直接cleanup就可以继续排队了
-        
-        
     }
 
     private void HandleOverAnimation(NodeBaseComponent node)
