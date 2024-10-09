@@ -1315,9 +1315,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NodeData: {fileID: 11400000, guid: 010081ffc29329942aeea56f914cd07b, type: 2}
-  GroupData: {fileID: 0}
+  GroupData: {fileID: 11400000, guid: d042f8d7b75b6c7488c207a807e30626, type: 2}
   StateLabel: {fileID: 2081138551}
-  receiverList: []
+  receiverList:
+  - {fileID: 1345988176}
+  - {fileID: 1644978985}
+  - {fileID: 1653825198}
+  - {fileID: 1515350429}
   NodeGenerator: {fileID: 1035368813}
   receiverManager: {fileID: 1673636129}
   nodeList: []
