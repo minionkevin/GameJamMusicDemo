@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class NodeManager : BaseSingleton<NodeManager>
@@ -22,22 +24,23 @@ public class NodeManager : BaseSingleton<NodeManager>
     {
         // Start process data and spawn
         NodeGenerator.StartSpawn();
-        
-        foreach (var index in GroupData.groupAOrder)
+
+        foreach (float num in GroupData.GroupStartTime)
         {
-            StartCoroutine(Test(NodeData.NodeLists[index].GroupStartTime));
-        }   
+            StartCoroutine(StartTimer(num));
+        }
     }
 
     public void SpawnLevel()
     {
         if (GroupBIndex > GroupData.groupBOrder.Count - 1 || GroupAIndex > GroupData.groupAOrder.Count - 1) return;
         if (GroupData.groupAOrder[GroupAIndex] > NodeData.NodeLists.Count - 1 || GroupData.groupBOrder[GroupBIndex] > NodeData.NodeLists.Count - 1) return;
-        
+
+        float groupStartTime = GroupData.GroupStartTime[GroupAIndex];
         // Update receiver
         receiverManager.UpdateInputName(NodeGenerator.IsPlayerB ? NodeData.NodeLists[GroupData.groupBOrder[GroupBIndex]].NodeName : NodeData.NodeLists[GroupData.groupAOrder[GroupAIndex]].NodeName);
         // Spawn level
-        NodeGenerator.SpawnLevel(NodeGenerator.IsPlayerB ? NodeData.NodeLists[GroupData.groupBOrder[GroupBIndex]] : NodeData.NodeLists[GroupData.groupAOrder[GroupAIndex]]);
+        NodeGenerator.SpawnSingleNode(NodeGenerator.IsPlayerB ? NodeData.NodeLists[GroupData.groupBOrder[GroupBIndex]] : NodeData.NodeLists[GroupData.groupAOrder[GroupAIndex]],groupStartTime);
 
         StartCoroutine(NodeGenerator.ActivateNodes());
         
@@ -45,7 +48,7 @@ public class NodeManager : BaseSingleton<NodeManager>
         GroupAIndex++;
     }
     
-    IEnumerator Test(float waitTime)
+    IEnumerator StartTimer(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         SpawnLevel();

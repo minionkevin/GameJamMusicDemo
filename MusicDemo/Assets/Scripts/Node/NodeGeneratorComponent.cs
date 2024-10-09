@@ -18,18 +18,12 @@ public class NodeGeneratorComponent : MonoBehaviour
     {
         startTime = Time.time;
     }
-    
 
-    public void SpawnLevel(MusicNodeList data)
-    {
-        SpawnSingleNode(data);
-    }
-
-    private void SpawnSingleNode(MusicNodeList data)
+    public void SpawnSingleNode(MusicNodeList data,float groupStartTime)
     {
         foreach (var nodeData in data.NodeList)
         {
-            float newStartTime = nodeData.StartTime + data.GroupStartTime;
+            float newStartTime = nodeData.StartTime + groupStartTime;
             HandleSpawnNode(nodeData, newStartTime);
         }
     }

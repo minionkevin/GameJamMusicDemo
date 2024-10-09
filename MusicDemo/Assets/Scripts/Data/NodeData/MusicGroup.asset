@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MusicGroupScriptableObject
   groupAOrder: 000000000100000003000000
   groupBOrder: 000000000200000000000000
+  GroupStartTime:
+  - 0
+  - 5.3
+  - 7.8
