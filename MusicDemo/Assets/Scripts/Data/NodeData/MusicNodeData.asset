@@ -17,10 +17,20 @@ MonoBehaviour:
     - Name: MA
       NodeId: 0
       Type: 0
-      StartTime: 0.5
-    - Name: KA
+      StartTime: 2
+    GroupStartTime: 1
+    isPlayerB: 1
+  - NodeList:
+    - Name: MA
       NodeId: 0
       Type: 0
-      StartTime: 1
+      StartTime: 3
     GroupStartTime: 2
+    isPlayerB: 1
+  - NodeList:
+    - Name: MA
+      NodeId: 0
+      Type: 0
+      StartTime: 4
+    GroupStartTime: 3
     isPlayerB: 1

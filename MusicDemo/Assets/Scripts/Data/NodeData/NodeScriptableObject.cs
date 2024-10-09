@@ -12,7 +12,7 @@ public class NodeScriptableObject : ScriptableObject
 public class MusicNodeList
 {
     public List<MusicNode> NodeList = new List<MusicNode>();
-    public int GroupStartTime;
+    public float GroupStartTime;
     public bool isPlayerB;
 }
 

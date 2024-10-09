@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -10,25 +11,24 @@ public class NodeGeneratorComponent : MonoBehaviour
     // 根据type来区分prefab，不需要每个配置
     // 注意：A和B的顺序必须和NodeType保持完全一样
     public List<GameObject> NodePrefab = new List<GameObject>();
-    
-    // todo Add object pool for all nodes 
-    private float groupWaitSpan = 0f;
+
+    private float startTime;
     
     private void Start()
     {
+        startTime = Time.time;
         // check for completion and increase level here
-
         SpawnLevel();
         StartCoroutine(ActivateNodes());
+        Debug.LogError("start " + DateTime.UtcNow);
     }
-
+    
     private void SpawnLevel()
     {
         foreach (var data in NodeManager.Instance.NodeData.NodeLists)
         {
             if (data.isPlayerB && IsPlayerB) SpawnSingleNode(data);
             else SpawnSingleNode(data);
-            groupWaitSpan = data.GroupStartTime;
         }
     }
 
@@ -36,6 +36,9 @@ public class NodeGeneratorComponent : MonoBehaviour
     {
         foreach (var nodeData in data.NodeList)
         {
+            Debug.LogError("GROUP " + data.GroupStartTime + " start " + nodeData.StartTime);
+            nodeData.StartTime += data.GroupStartTime;
+            Debug.LogError(nodeData.StartTime);
             HandleSpawnNode(nodeData);
         }
     }
@@ -72,13 +75,17 @@ public class NodeGeneratorComponent : MonoBehaviour
 
     private IEnumerator ActivateNodes()
     {
-        yield return new WaitForSeconds(groupWaitSpan);
         foreach (var node in NodeManager.Instance.nodeList)
         {
-            node.SetActive(true);
             NodeBaseComponent nodeComponent = node.GetComponent<NodeBaseComponent>();
+
+            float targetTime = startTime + nodeComponent.StartTime;
+            while (Time.time < targetTime) yield return null;
+            
+            // yield return new WaitForSeconds(nodeComponent.StartTime);
+            Debug.LogError("node " + DateTime.UtcNow);
+            node.SetActive(true);
             HandleNodeMove(nodeComponent);
-            yield return new WaitForSeconds(nodeComponent.StartTime);
         }
     }
 
