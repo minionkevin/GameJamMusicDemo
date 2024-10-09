@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class NodeReceiverComponent : MonoBehaviour
 {
@@ -14,13 +11,19 @@ public class NodeReceiverComponent : MonoBehaviour
 
     private void Awake()
     {
-        NodeManager.Instance.AddReceiver(this);
+        NameLabel.text = Name;
+    }
+
+    public void RefreshName(string newName)
+    {
+        // todo 考虑中途+receiver的情况
+        // NodeManager.Instance.CleanReceiver();
+        Name = newName;
         NameLabel.text = Name;
     }
 
     public void HandlePlayerInput()
     {
-
         foreach (var node in NodeManager.Instance.nodeList)
         {
             if (node == null) continue;

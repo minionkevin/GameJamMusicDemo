@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -11,35 +10,28 @@ public class NodeGeneratorComponent : MonoBehaviour
     // 根据type来区分prefab，不需要每个配置
     // 注意：A和B的顺序必须和NodeType保持完全一样
     public List<GameObject> NodePrefab = new List<GameObject>();
+    
 
     private float startTime;
+    private List<GameObject> inactiveNodeList = new List<GameObject>();
     
-    private void Start()
+    public void StartSpawn()
     {
         startTime = Time.time;
-        // check for completion and increase level here
-        SpawnLevel();
-        StartCoroutine(ActivateNodes());
-        Debug.LogError("start " + DateTime.UtcNow);
     }
     
-    private void SpawnLevel()
+
+    public void SpawnLevel(MusicNodeList data)
     {
-        foreach (var data in NodeManager.Instance.NodeData.NodeLists)
-        {
-            if (data.isPlayerB && IsPlayerB) SpawnSingleNode(data);
-            else SpawnSingleNode(data);
-        }
+        SpawnSingleNode(data);
     }
 
     private void SpawnSingleNode(MusicNodeList data)
     {
         foreach (var nodeData in data.NodeList)
         {
-            Debug.LogError("GROUP " + data.GroupStartTime + " start " + nodeData.StartTime);
-            nodeData.StartTime += data.GroupStartTime;
-            Debug.LogError(nodeData.StartTime);
-            HandleSpawnNode(nodeData);
+            float newStartTime = nodeData.StartTime + data.GroupStartTime;
+            HandleSpawnNode(nodeData, newStartTime);
         }
     }
 
@@ -48,7 +40,7 @@ public class NodeGeneratorComponent : MonoBehaviour
         return NodePrefab[type];
     }
     
-    private void HandleSpawnNode(MusicNode nodeData)
+    private void HandleSpawnNode(MusicNode nodeData, float newStartTime)
     {
         NodeReceiverComponent receiverComponent = NodeManager.Instance.FindStartPos(nodeData.Name);
         
@@ -60,10 +52,11 @@ public class NodeGeneratorComponent : MonoBehaviour
         node.transform.position = startPos;
         
         NodeBaseComponent nodeComponent = node.GetComponent<NodeBaseComponent>();
-        nodeComponent.Setup(nodeData.Name,nodeData.NodeId,nodeData.Type,nodeData.StartTime);
+        nodeComponent.Setup(nodeData.Name,nodeData.NodeId,nodeData.Type,newStartTime);
         node.SetActive(false);
         
         NodeManager.Instance.nodeList.Add(node);
+        inactiveNodeList.Add(node);
         
         if (nodeData.Type == NodeType.NORMAL)
         {
@@ -73,20 +66,21 @@ public class NodeGeneratorComponent : MonoBehaviour
         else node.transform.SetParent(MusicNodeContainer);
     }
 
-    private IEnumerator ActivateNodes()
+    public IEnumerator ActivateNodes()
     {
-        foreach (var node in NodeManager.Instance.nodeList)
+        foreach (var node in inactiveNodeList)
         {
             NodeBaseComponent nodeComponent = node.GetComponent<NodeBaseComponent>();
-
             float targetTime = startTime + nodeComponent.StartTime;
             while (Time.time < targetTime) yield return null;
             
-            // yield return new WaitForSeconds(nodeComponent.StartTime);
-            Debug.LogError("node " + DateTime.UtcNow);
             node.SetActive(true);
             HandleNodeMove(nodeComponent);
+
+            // todo find a better way to refresh
+            // if (node == inactiveNodeList[^1]) NodeManager.Instance.SpawnLevel();
         }
+        inactiveNodeList.Clear();
     }
 
     private async void HandleNodeMove(NodeBaseComponent nodeComponent)

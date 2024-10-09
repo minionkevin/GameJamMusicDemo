@@ -1,5 +1,3 @@
-
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +5,15 @@ using UnityEngine.UI;
 public class NodeReceiverManagerComponent : MonoBehaviour
 {
     public List<Button> InputBtns = new List<Button>();
+    public List<NodeReceiverComponent> ReceiverList = new List<NodeReceiverComponent>();
+
+    public void UpdateInputName(List<string> nameData)
+    {
+        for (int i = 0; i < nameData.Count; i++)
+        {
+            ReceiverList[i].RefreshName(nameData[i]);
+        }
+    }
 
     private void Update()
     {

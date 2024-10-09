@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "MusicNodeData", menuName = "ScriptableObjects/MusicNodeData", order = 1)]
 public class NodeScriptableObject : ScriptableObject
@@ -12,8 +11,16 @@ public class NodeScriptableObject : ScriptableObject
 public class MusicNodeList
 {
     public List<MusicNode> NodeList = new List<MusicNode>();
+    public List<string> NodeName = new List<string>();
     public float GroupStartTime;
     public bool isPlayerB;
+}
+
+[CreateAssetMenu(fileName = "MusicGroup", menuName = "ScriptableObjects/MusicGroupData", order = 1)]
+public class MusicGroupScriptableObject : ScriptableObject
+{
+    public List<int> groupAOrder = new List<int>();
+    public List<int> groupBOrder = new List<int>();
 }
 
 [System.Serializable]
