@@ -1167,7 +1167,11 @@ MonoBehaviour:
   NodeData: {fileID: 11400000, guid: 010081ffc29329942aeea56f914cd07b, type: 2}
   GroupData: {fileID: 11400000, guid: 79296b0ba5a42cb44a535eb0de261035, type: 2}
   StateLabel: {fileID: 0}
-  receiverList: []
+  receiverList:
+  - {fileID: 2024609042}
+  - {fileID: 1900996399}
+  - {fileID: 1649661769}
+  - {fileID: 854699525}
   NodeGenerator: {fileID: 1035368813}
   receiverManager: {fileID: 1673636129}
   nodeList: []

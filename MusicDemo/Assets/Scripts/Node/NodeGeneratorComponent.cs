@@ -11,7 +11,6 @@ public class NodeGeneratorComponent : MonoBehaviour
     // 注意：A和B的顺序必须和NodeType保持完全一样
     public List<GameObject> NodePrefab = new List<GameObject>();
     
-
     private float startTime;
     private List<GameObject> inactiveNodeList = new List<GameObject>();
     
@@ -68,18 +67,17 @@ public class NodeGeneratorComponent : MonoBehaviour
 
     public IEnumerator ActivateNodes()
     {
-        foreach (var node in inactiveNodeList)
+        for (int i = 0; i < inactiveNodeList.Count; i++)
         {
+            var node = inactiveNodeList[i];
             NodeBaseComponent nodeComponent = node.GetComponent<NodeBaseComponent>();
             float targetTime = startTime + nodeComponent.StartTime;
             while (Time.time < targetTime) yield return null;
-            
+
             node.SetActive(true);
             HandleNodeMove(nodeComponent);
-
-            // todo find a better way to refresh
-            // if (node == inactiveNodeList[^1]) NodeManager.Instance.SpawnLevel();
         }
+
         inactiveNodeList.Clear();
     }
 
@@ -111,6 +109,6 @@ public class NodeGeneratorComponent : MonoBehaviour
         }
         // use object pool and clean up 0.o
         // NodeManager.Instance.RemoveOnNodeList(nodeComponent.gameObject);
-        Destroy(nodeComponent.gameObject);  
+        if(nodeComponent!=null) Destroy(nodeComponent.gameObject);  
     }
 }

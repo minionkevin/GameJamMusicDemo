@@ -16,36 +16,112 @@ MonoBehaviour:
   - NodeList:
     - Name: NA
       NodeId: 0
-      Type: 2
+      Type: 3
       StartTime: 0
+    - Name: NA
+      NodeId: 0
+      Type: 3
+      StartTime: 5
+    - Name: NA
+      NodeId: 0
+      Type: 3
+      StartTime: 5.1
+    - Name: NA
+      NodeId: 0
+      Type: 3
+      StartTime: 5.2
     NodeName:
-    - BA
-    - KA
-    - SA
-    - WA
-    GroupStartTime: 1
+    - X
+    - X
+    - X
+    - X
+    GroupStartTime: 0
     isPlayerB: 0
   - NodeList:
-    - Name: MA
+    - Name: DON
       NodeId: 0
       Type: 0
       StartTime: 0
-    NodeName:
-    - AA
-    - BA
-    - CA
-    - MA
-    GroupStartTime: 3
-    isPlayerB: 0
-  - NodeList:
-    - Name: MA
+    - Name: PA
       NodeId: 0
       Type: 0
-      StartTime: 20
+      StartTime: 0.3
+    - Name: DON
+      NodeId: 0
+      Type: 0
+      StartTime: 0.6
+    - Name: PA
+      NodeId: 0
+      Type: 0
+      StartTime: 0.9
+    - Name: DON
+      NodeId: 0
+      Type: 0
+      StartTime: 1.3
+    - Name: PA
+      NodeId: 0
+      Type: 0
+      StartTime: 1.6
+    - Name: DON
+      NodeId: 0
+      Type: 0
+      StartTime: 1.9
+    - Name: PA
+      NodeId: 0
+      Type: 0
+      StartTime: 2.2
     NodeName:
-    - AA
-    - BA
+    - DON
+    - PA
+    - X
+    - X
+    GroupStartTime: 5.3
+    isPlayerB: 0
+  - NodeList: []
+    NodeName:
+    - DON
+    - PA
+    - X
+    - X
+    GroupStartTime: 5.3
+    isPlayerB: 0
+  - NodeList:
+    - Name: DON
+      NodeId: 0
+      Type: 0
+      StartTime: 0
+    - Name: PA
+      NodeId: 0
+      Type: 0
+      StartTime: 0.3
+    - Name: DON
+      NodeId: 0
+      Type: 0
+      StartTime: 0.6
+    - Name: PA
+      NodeId: 0
+      Type: 0
+      StartTime: 0.9
+    - Name: DON
+      NodeId: 0
+      Type: 0
+      StartTime: 1.3
+    - Name: PA
+      NodeId: 0
+      Type: 0
+      StartTime: 1.6
+    - Name: DON
+      NodeId: 0
+      Type: 0
+      StartTime: 1.9
+    - Name: PA
+      NodeId: 0
+      Type: 0
+      StartTime: 2.2
+    NodeName:
+    - DON
+    - PA
+    - DA
     - CA
-    - MA
-    GroupStartTime: 5
+    GroupStartTime: 7.8
     isPlayerB: 0

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: MusicGroup
   m_EditorClassIdentifier: Assembly-CSharp::MusicGroupScriptableObject
-  groupAOrder: 0000000001000000
-  groupBOrder: 0100000001000000
+  groupAOrder: 000000000100000003000000
+  groupBOrder: 000000000200000000000000

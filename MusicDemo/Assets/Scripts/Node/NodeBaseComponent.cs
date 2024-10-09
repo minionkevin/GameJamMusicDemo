@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class NodeBaseComponent : MonoBehaviour
 {
@@ -13,7 +10,6 @@ public class NodeBaseComponent : MonoBehaviour
     public float StartTime;
     protected NodeReceiverComponent receiver;
     public bool IsCheck = false;
-
 
     public void Setup(string name, int id, int type, float startTime)
     {

@@ -858,6 +858,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio
       objectReference: {fileID: 0}
+    - target: {fileID: 1565681260885903936, guid: cd708cca0c0e0ab46a223aafd869f3ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1311,6 +1315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NodeData: {fileID: 11400000, guid: 010081ffc29329942aeea56f914cd07b, type: 2}
+  GroupData: {fileID: 0}
   StateLabel: {fileID: 2081138551}
   receiverList: []
   NodeGenerator: {fileID: 1035368813}
