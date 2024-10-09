@@ -17,17 +17,27 @@ public class NodeGeneratorComponent : MonoBehaviour
     private void Start()
     {
         // check for completion and increase level here
-        SpawnLevel(!IsPlayerB ? 0 : 1);
+
+        SpawnLevel();
         StartCoroutine(ActivateNodes());
     }
 
-    private void SpawnLevel(int levelNum)
+    private void SpawnLevel()
     {
-        foreach (var nodeData in NodeManager.Instance.NodeData.NodeList)
+        foreach (var data in NodeManager.Instance.NodeData.NodeLists)
         {
-            if(nodeData.Group==levelNum) HandleSpawnNode(nodeData);
+            if (data.isPlayerB && IsPlayerB) SpawnSingleNode(data);
+            else SpawnSingleNode(data);
+            groupWaitSpan = data.GroupStartTime;
         }
-        groupWaitSpan = NodeManager.Instance.NodeData.GroupStartTime[levelNum];
+    }
+
+    private void SpawnSingleNode(MusicNodeList data)
+    {
+        foreach (var nodeData in data.NodeList)
+        {
+            HandleSpawnNode(nodeData);
+        }
     }
 
     private GameObject FindSpawnPrefab(int type)

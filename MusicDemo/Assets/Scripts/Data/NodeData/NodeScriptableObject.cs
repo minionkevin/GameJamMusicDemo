@@ -5,8 +5,15 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "MusicNodeData", menuName = "ScriptableObjects/MusicNodeData", order = 1)]
 public class NodeScriptableObject : ScriptableObject
 {
+    public List<MusicNodeList> NodeLists = new List<MusicNodeList>();
+}
+
+[System.Serializable]
+public class MusicNodeList
+{
     public List<MusicNode> NodeList = new List<MusicNode>();
-    public List<float> GroupStartTime;
+    public int GroupStartTime;
+    public bool isPlayerB;
 }
 
 [System.Serializable]
@@ -20,10 +27,6 @@ public class MusicNode
     public int Type;
     // 在某一段的什么时候发出
     public float StartTime;
-    // 在哪一段，必须要匹配上面的GroupStartTime
-    // 假设group=0，也就是groupstarttime[0] = 这个片段的开始时间
-    // groupstarttime[0] = 10s,startTime=0.5,也就说这个块会在10.5秒的时候开始掉落
-    public int Group;
 }
 
 [System.Serializable]

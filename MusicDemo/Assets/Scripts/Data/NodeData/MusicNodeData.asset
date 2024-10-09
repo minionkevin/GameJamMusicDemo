@@ -12,57 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30bf878e9a0308e41a87c294fc5fd8b7, type: 3}
   m_Name: MusicNodeData
   m_EditorClassIdentifier: 
-  NodeList:
-  - Name: NA
-    NodeId: 0
-    Type: 4
-    StartTime: 0.5
-    Group: 0
-  - Name: BA
-    NodeId: 0
-    Type: 0
-    StartTime: 2
-    Group: 0
-  - Name: KA
-    NodeId: 0
-    Type: 0
-    StartTime: 2.5
-    Group: 0
-  - Name: MA
-    NodeId: 0
-    Type: 0
-    StartTime: 3
-    Group: 0
-  - Name: KA
-    NodeId: 0
-    Type: 0
-    StartTime: 3.5
-    Group: 0
-  - Name: NA
-    NodeId: 0
-    Type: 3
-    StartTime: 0.5
-    Group: 1
-  - Name: BA
-    NodeId: 0
-    Type: 2
-    StartTime: 2
-    Group: 1
-  - Name: KA
-    NodeId: 0
-    Type: 2
-    StartTime: 2.5
-    Group: 1
-  - Name: MA
-    NodeId: 0
-    Type: 2
-    StartTime: 3
-    Group: 1
-  - Name: KA
-    NodeId: 0
-    Type: 2
-    StartTime: 3.5
-    Group: 1
-  GroupStartTime:
-  - 0
-  - 0
+  NodeLists:
+  - NodeList:
+    - Name: MA
+      NodeId: 0
+      Type: 0
+      StartTime: 0.5
+    - Name: KA
+      NodeId: 0
+      Type: 0
+      StartTime: 1
+    GroupStartTime: 2
+    isPlayerB: 1
