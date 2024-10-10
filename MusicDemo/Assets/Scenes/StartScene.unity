@@ -894,6 +894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneAName: PlayerAScene
   SceneBName: PlayerBScene
+  CurrSceneName: StartScene
 --- !u!1 &1022911829
 GameObject:
   m_ObjectHideFlags: 0

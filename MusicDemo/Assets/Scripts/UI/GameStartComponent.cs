@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,41 +7,50 @@ public class GameStartComponent : MonoBehaviour
 {
     public string SceneAName;
     public string SceneBName;
-    private AsyncOperation asyncSceneA;
-    private AsyncOperation asyncSceneB;
+    // public string CurrSceneName;
+    private bool test =false;
+    
 
     public void HandleLoadScene(bool isA)
     {
-        // StartCoroutine(LoadScenes(isA));
-        HandleChangeScene(isA);
+        StartCoroutine(LoadScenesCoroutine(SceneAName,SceneBName,isA));
+        // HandleChangeScene(isA);
     }
-
-    // todo add this back
-    private IEnumerator LoadScenes(bool value)
+    
+    
+    private IEnumerator LoadScenesCoroutine(string sceneA, string sceneB,bool isA)
     {
-        asyncSceneA = SceneManager.LoadSceneAsync(SceneAName, LoadSceneMode.Additive);
-        asyncSceneA.allowSceneActivation = false;
-        
-        // asyncSceneB = SceneManager.LoadSceneAsync(SceneBName, LoadSceneMode.Additive);
-        // asyncSceneB.allowSceneActivation = false;
+        // 获取当前场景名称
+        string currentSceneName = SceneManager.GetActiveScene().name;
 
-        // while (!asyncSceneA.isDone || !asyncSceneB.isDone)
-        // {
-        //     if (asyncSceneA.progress >= 0.9f && asyncSceneB.progress >= 0.9f) break;
-        //     yield return null;
-        // }
+        // 开始异步加载两个场景
+        AsyncOperation loadOperationA = SceneManager.LoadSceneAsync(sceneA, LoadSceneMode.Additive);
+        //loadOperationA.allowSceneActivation = false; 
+        AsyncOperation loadOperationB = SceneManager.LoadSceneAsync(sceneB, LoadSceneMode.Additive);
+        //loadOperationA.allowSceneActivation = false; 
         
-        while (!asyncSceneA.isDone)
+        // 等待两个场景加载完成
+        while ((!loadOperationA.isDone || !loadOperationB.isDone) && !test)
         {
-            if (asyncSceneA.progress >= 0.9f) break;
-            yield return null;
+            yield return null; // 等待下一帧
         }
+        test = true;
         
-        if(value)asyncSceneA.allowSceneActivation = true;
-        else asyncSceneB.allowSceneActivation = true;
-        
-        SceneManager.UnloadSceneAsync("StartScene");
+
+        // 隐藏当前场景
+        AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(currentSceneName);
+
+        SceneManager.UnloadSceneAsync(isA ? SceneBName : SceneAName);
+
+        // 等待当前场景卸载完成
+        while (!unloadOperation.isDone)
+        {
+            yield return null; // 等待下一帧
+        }
     }
+
+
+
 
     private void HandleChangeScene(bool isA)
     {
