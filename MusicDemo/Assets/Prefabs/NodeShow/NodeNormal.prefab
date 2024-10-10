@@ -92,10 +92,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 72
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 16
@@ -224,4 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NameLabel: {fileID: 8037693456019676835}
-  TimeSpan: 0
+  NodeName: 
+  type: 0
+  StartTime: 0
+  IsCheck: 0

@@ -64,6 +64,7 @@ public class NodeGeneratorComponent : MonoBehaviour
         for (int i = 0; i < inactiveNodeList.Count; i++)
         {
             var node = inactiveNodeList[i];
+            if (node == null) continue;
             NodeBaseComponent nodeComponent = node.GetComponent<NodeBaseComponent>();
             float targetTime = startTime + nodeComponent.StartTime;
             while (Time.time < targetTime) yield return null;
