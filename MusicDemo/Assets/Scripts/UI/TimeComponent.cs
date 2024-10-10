@@ -11,6 +11,10 @@ public class TimeComponent : MonoBehaviour
 
     private DateTime finalTime;
     private bool isCount = false;
+    private TimeSpan timeDiffA;
+    
+    private DateTime startTime;
+    private TimeSpan countdownDuration;
 
     void Start()
     {   
@@ -31,29 +35,29 @@ public class TimeComponent : MonoBehaviour
     {
         TimeSpan timeDiff = finalTime - DateTime.UtcNow;
         if (timeDiff.TotalMilliseconds <= 2000f) Show30Seconds(true);
+        
+        timeDiffA = finalTime - DateTime.UtcNow;
         StartCoroutine(HandleCountDown(isA));
     }
 
     IEnumerator HandleCountDown(bool isA)
     {
-        isCount = true;
+        startTime = DateTime.UtcNow;
+        // countdownDuration = TimeSpan.FromSeconds(5); // 30秒倒计时
 
-        while (isCount)
+        while (DateTime.UtcNow < finalTime)
         {
             TimeSpan timeDiff = finalTime - DateTime.UtcNow;
-            if (timeDiff.TotalMilliseconds <= 0)
-            {
-                timeDiff = TimeSpan.Zero;
-                isCount = false;
-                GameStart.HandleLoadScene(isA);
-            }
-            
+
             CountDownLabel.text = string.Format("{0:D2}:{1:D2}:{2:D3}",
                 timeDiff.Minutes,
                 timeDiff.Seconds,
                 timeDiff.Milliseconds);
 
-                yield return new WaitForSeconds(0.001f);
+            yield return null;
         }
+
+        CountDownLabel.text = "00:00:000"; 
+        GameStart.HandleLoadScene(isA);
     }
 }
